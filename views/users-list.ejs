@@ -10,15 +10,21 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
-
       <% users.forEach(user => { %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td>
-          <a href="/users/edit/<%= user._id %>">Edit</a>
+          <a href="/users/edit/<%= user._id %>">Edit</a> |
+          <form
+            action="/users/delete/<%= user._id %>"
+            method="POST"
+            style="display: inline"
+          >
+            <button type="submit">Delete</button>
+          </form>
         </td>
       </tr>
       <% }) %>

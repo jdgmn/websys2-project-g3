@@ -52,7 +52,56 @@ router.get("/list", async (req, res) => {
   }
 });
 
-const {ObjectId}  = require('mongodb');
+const { ObjectId } = require("mongodb");
 
 // show edit form
-router get('/edit/:id', async )
+router.get("/edit/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const usersCollection = db.collection("users");
+
+    const user = await usersCollection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
+    if (!user) {
+      return res.send("User not found.");
+    }
+    res.render("edit-user", { title: "Edit User", user: user });
+  } catch (err) {
+    console.error("Error loading user:", err);
+    res.send("Something went wrong.");
+  }
+});
+
+// handle update form
+router.post("/edit/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const usersCollection = db.collection("users");
+    await usersCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { name: req.body.name, email: req.body.email } }
+    );
+    res.redirect("/users/list");
+  } catch (err) {
+    console.error("Error updating user:", err);
+    res.send("Something went wrong.");
+  }
+});
+
+// delete user
+router.post("/delete/:id", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const usersCollection = db.collection("users");
+
+    await usersCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    res.redirect("/users/list");
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    res.send("Something went wrong.");
+  }
+});
