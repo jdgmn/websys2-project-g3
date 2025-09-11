@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const saltRounds = 12;
 const { MongoClient } = require("mongodb");
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
 require("dotenv").config();
 
 // mongoDB setup
@@ -50,10 +52,24 @@ router.post("/register", async (req, res) => {
     // 5. Insert into database
     await usersCollection.insertOne(newUser);
     // 6. Simulated verification link
+    // Base URL: local (http://localhost:3000) or deployed
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const verificationUrl = `${baseUrl}/users/verify/${token}`;
     res.send(`
-      <h2>Registration Successful!</h2>
-      <p>Please verify your account before logging in.</p>
-      <p><a href="/users/verify/${token}">Click here to verify</a></p>`);
+      <h2>Registration Successful!</h2>`);
+      //<p>Please verify your account before logging in.</p>
+      //<p><a href="/users/verify/${token}">Click here to verify</a></p>`);
+    // Send verification email using Resend
+    await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL, // stored in .env
+      to: newUser.email,
+      subject: "Verify your account",
+      html: `
+          <h2>Welcome, ${newUser.firstName}!</h2>
+          <p>Thank you for registering. Please verify your email by clicking the link
+          below:</p>
+          <a href="${verificationUrl}">${verificationUrl}</a>`,
+    });
   } catch (err) {
     console.error("Error saving user:", err);
     res.send("Something went wrong.");
@@ -164,6 +180,7 @@ router.post("/login", async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        isEmailVerified: user.isEmailVerified,
       };
       res.redirect("/users/dashboard");
     } else {
