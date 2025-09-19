@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     const verificationUrl = `${baseUrl}/users/verify/${token}`;
     res.send(`
-      <h2>Registration Successful!</h2>`);
+      <h2>Registration Successful!</h2>`);W
     //<p>Please verify your account before logging in.</p>
     //<p><a href="/users/verify/${token}">Click here to verify</a></p>`);
     // Send verification email using Resend
@@ -253,7 +253,6 @@ router.get("/verify/:token", async (req, res) => {
     res.send("Something went wrong during verification.");
   }
 });
-
 // Logout route
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {

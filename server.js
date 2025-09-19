@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
 // Session setup
 app.use(
   session({
