@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-  </head>
-  <body>
-    <h1>Edit User</h1>
-    <form action="/users/edit/<%= user._id %>" method="POST">
-      <label for="name">Name:</label><br />
+<html lang="en">
 
-      <input
-        type="text"
-        name="name"
-        value="<%= user.name %>"
-        required
-      /><br /><br />
-      <label for="email">Email:</label><br />
-      <input
-        type="email"
-        name="email"
-        value="<%= user.email %>"
-        required
-      /><br /><br />
-      <button type="submit">Update</button><br />
-      <a href="/users/list">go back</a>
-    </form>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <div class="edit-user-container">
+        <h1>Edit User</h1>
+        <form action="/users/edit/<%= user._id %>" method="POST">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value="<%= user.name %>" required />
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="<%= user.email %>" required />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit">Update</button>
+            </div>
+
+            <!-- Go Back Link -->
+            <div class="back-link">
+                <a href="/users/list">Go Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+
 </html>

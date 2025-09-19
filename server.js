@@ -6,6 +6,10 @@ const session = require("express-session"); // Added for user sessions
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const path = require('path');
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
