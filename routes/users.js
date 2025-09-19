@@ -260,7 +260,6 @@ router.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       return res.send("Something went wrong during logout.");
     }
-    req.session.message = "You have been logged out."; // Add logout message
     res.redirect("/users/login");
   });
 });

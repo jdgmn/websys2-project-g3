@@ -22,27 +22,13 @@ app.use(
   })
 );
 
-// Session expiration middleware
-app.use((req, res, next) => {
-  // Check if user is logged in
-  if (req.session && !req.session.user && req.originalUrl !== "/users/login") {
-    req.session.message = "Your session has expired. Please log in again.";
-    return res.redirect("/users/login");
-  }
-  
-  // If a logout happens, set message
-  if (req.session && req.session.message && req.originalUrl === "/users/login") {
-    return next();
-  }
-  
-  next();
-});
-
 // Routes
 const indexRoute = require("./routes/index");
 const usersRoute = require("./routes/users");
+const passwordRoute = require('./routes/password');
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
+app.use('/password', passwordRoute);
 // MongoDB Setup
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
