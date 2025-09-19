@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     const verificationUrl = `${baseUrl}/users/verify/${token}`;
     res.send(`
-      <h2>Registration Successful!</h2>`);W
+      <h2>Registration Successful!</h2>`);
     //<p>Please verify your account before logging in.</p>
     //<p><a href="/users/verify/${token}">Click here to verify</a></p>`);
     // Send verification email using Resend
