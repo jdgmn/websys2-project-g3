@@ -9,4 +9,31 @@ router.get("/", (req, res) => {
     message: "Hello, MongoDB is connected!",
   });
 });
+
+
+// products
+router.get("/products", (req, res) => {
+  res.render("products", { title: "Products" });
+});
+
+// about
+router.get("/about", (req, res) => {
+  res.render("about", { title: "About Us" });
+});
+
+// contact
+router.get("/contact", (req, res) => {
+  res.render("contact", { title: "Contact Us" });
+});
+
+// privacy
+router.get("/privacy", (req, res) => {
+  res.render("privacy", { title: "Privacy Policy" });
+});
+
+// terms
+router.get("/terms", (req, res) => {
+  res.render("terms", { title: "Terms & Conditions" });
+});
+
 module.exports = router;
