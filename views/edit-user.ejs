@@ -12,26 +12,31 @@
     <div class="edit-user-container">
         <h1>Edit User</h1>
         <form action="/users/edit/<%= user._id %>" method="POST">
-            <!-- Name Field -->
+            <!-- name-->
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" value="<%= user.name %>" required />
+                <label for="name">First Name:</label>
+                <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>" required />
             </div>
 
-            <!-- Email Field -->
+            <div class="form-group">
+                <label for="name">Last Name:</label>
+                <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" required />
+            </div>
+
+            <!-- email -->
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" value="<%= user.email %>" required />
             </div>
 
-            <!-- Submit Button -->
+            <!-- submit-->
             <div class="form-actions">
                 <button type="submit">Update</button>
             </div>
 
-            <!-- Go Back Link -->
+            <!-- go back-->
             <div class="back-link">
-                <a href="/users/list">Go Back</a>
+                <a href="/users/admin">Go Back</a>
             </div>
         </form>
     </div>

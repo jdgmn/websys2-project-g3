@@ -147,7 +147,7 @@ router.post("/delete/:id", async (req, res) => {
 
 // show login form
 router.get("/login", (req, res) => {
-  const message = req.session.message || null;  // Get message from session if exists
+  const message = req.session.message || null; // Get message from session if exists
   req.session.message = null; // Reset session message after rendering
   res.render("login", { title: "Login", message });
 });
@@ -183,6 +183,7 @@ router.post("/login", async (req, res) => {
         email: user.email,
         role: user.role,
         isEmailVerified: user.isEmailVerified,
+        accountStatus: user.accountStatus,
       };
       res.redirect("/users/dashboard");
     } else {

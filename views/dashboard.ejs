@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
 
-<body>
+  <body>
+    <center>
     <div class="dashboard-container">
-        <h1>Welcome, <%= user.firstName %> <%= user.lastName %>!</h1>
+      <h1>Welcome, <%= user.firstName %> <%= user.lastName %>!</h1>
 
-        <div class="user-info">
-            <p><strong>User ID:</strong> <%= user.userId %></p>
-            <p><strong>Email:</strong> <%= user.email %></p>
-            <p><strong>Role:</strong> <%= user.role %></p>
-            <p><strong>Status:</strong> <%= user.isActive ? "Active" : "Inactive" %></p>
-            <p><strong>Email Verified:</strong> <%= user.isEmailVerified ? "Yes" : "No" %></p>
-        </div>
+      <div class="user-info">
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>User ID:</strong> <%= user.userId %></p>
+        <p><strong>Role:</strong> <%= user.role %></p>
+        <p><strong>Status:</strong> <%= user.accountStatus || "Inactive"%></p>
+        <p>
+          <strong>Email Verified:</strong> <%= user.isEmailVerified ? "Yes" :
+          "No" %>
+        </p>
+      </div>
 
-        <ul class="dashboard-links">
-            <li><a href="/users/edit-user">Edit Profile</a></li>
-            <% if (user.role === 'admin') { %>
-                <li><a href="/users/admin">Admin Dashboard</a></li>
-            <% } %>
-        </ul>
+      <ul class="dashboard-links">
+        <% if (user.role === 'admin') { %>
+            <a href="/users/admin">Admin Dashboard</a>
+        <% } %>
+      </ul>
 
-        <a href="/users/logout" class="logout-link">Logout</a>
+      <a href="/users/logout" class="logout-link">Logout</a>
     </div>
-</body>
-
+    </center>
+  </body>
 </html>

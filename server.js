@@ -21,7 +21,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: false, // set to true only if using HTTPS
-      maxAge: 1 * 60 * 1000, // 15 minutes (in milliseconds)
+      maxAge: 15 * 60 * 1000, // 15 minutes (in milliseconds)
     },
   })
 );
