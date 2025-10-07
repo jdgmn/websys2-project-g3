@@ -58,12 +58,12 @@ async function main() {
   }
 }
 
-// 404 handler (must be the last route)
+// 404 handler
 app.use((req, res, next) => {
   res.status(404).render("404", { title: "Page Not Found" });
 });
 
-// Error handler (after the 404 is fine; Express will skip 404 for thrown errors)
+// Error handler
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).render("500", { title: "Server Error" });
