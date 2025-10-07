@@ -39,6 +39,7 @@ const passwordRoute = require("./routes/password");
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
 app.use("/password", passwordRoute);
+
 // MongoDB Setup
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
@@ -63,9 +64,10 @@ app.use((req, res, next) => {
   res.status(404).render("404", { title: "Page Not Found" });
 });
 
-// Error handler
+// 500 handler
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error(err.stack);
+  if (res.headersSent) return next(err);
   res.status(500).render("500", { title: "Server Error" });
 });
 

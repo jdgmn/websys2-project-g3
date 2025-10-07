@@ -46,55 +46,28 @@
       }
       .links a.primary {
         border-color: var(--accent);
-        color: white;
+        color: #fff;
         background: var(--accent);
-      }
-
-      form.search {
-        margin-top: 1rem;
-        display: flex;
-        gap: 0.5rem;
-        justify-content: center;
-      }
-      form.search input {
-        padding: 0.6rem 0.8rem;
-        min-width: 16rem;
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-      }
-      form.search button {
-        padding: 0.6rem 0.9rem;
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-        background: white;
       }
     </style>
   </head>
   <body>
     <main class="wrap" role="main" aria-labelledby="title">
       <div aria-hidden="true" style="font-size: 4rem"></div>
-      <h1 id="title">500 - Please try again</h1>
-      <p class="lead">The link may be broken or the page may have moved.</p>
+      <h1 id="title">Something went wrong</h1>
+      <p class="lead">
+        Please try again. If this keeps happening, return to the home page.
+      </p>
       <div class="links">
-        <a class="primary" href="/">Go to Home</a>
+        <a href="/">Home</a>
         <% if (user) { %>
-        <a href="/users/dashboard">Open Dashboard</a>
+        <a href="/users/dashboard">Dashboard</a>
         <a href="/users/logout">Logout</a>
         <% } else { %>
         <a href="/users/login">Login</a>
-        <a href="/users/register">Create Account</a>
+        <a href="/users/register">Register</a>
         <% } %>
       </div>
-      <!-- optional: lightweight site search via query param -->
-      <form class="search" action="/search" method="GET">
-        <input
-          type="text"
-          name="q"
-          placeholder="Search the site"
-          aria-label="Search"
-        />
-        <button type="submit">Search</button>
-      </form>
     </main>
   </body>
 </html>
