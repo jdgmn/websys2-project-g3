@@ -7,8 +7,8 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const path = require('path');
-app.use('/styles', express.static(path.join(__dirname, 'styles')));
+const path = require("path");
+app.use("/styles", express.static(path.join(__dirname, "styles")));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,13 +26,19 @@ app.use(
   })
 );
 
+// near the top of server.js, after session middleware
+app.use((req, res, next) => {
+  res.locals.user = req.session?.user || null;
+  next();
+});
+
 // Routes
 const indexRoute = require("./routes/index");
 const usersRoute = require("./routes/users");
-const passwordRoute = require('./routes/password');
+const passwordRoute = require("./routes/password");
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
-app.use('/password', passwordRoute);
+app.use("/password", passwordRoute);
 // MongoDB Setup
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
@@ -51,4 +57,16 @@ async function main() {
     console.error("MongoDB connection failed", err);
   }
 }
+
+// 404 handler (must be the last route)
+app.use((req, res, next) => {
+  res.status(404).render("404", { title: "Page Not Found" });
+});
+
+// Error handler (after the 404 is fine; Express will skip 404 for thrown errors)
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).render("500", { title: "Server Error" });
+});
+
 main();
