@@ -1,0 +1,4 @@
+MONGO_URI='mongodb+srv://tesv27_db_user:admin@cluster0.iyz9igs.mongodb.net/'
+RESEND_API_KEY='re_7BWaqFbH_ATW84SvdEMsMPFV5F7RGLy3Y'
+BASE_URL='http://localhost:3000'
+RESEND_FROM_EMAIL='onboarding@resend.dev'
