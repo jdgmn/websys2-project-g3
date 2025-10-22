@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
 
-<body>
+  <body>
     <div class="login-form-container">
-        <h1>Login</h1>
+      <h1>Login</h1>
 
-        <form action="/users/login" method="POST" class="login-form">
-            <!-- Email -->
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-
-            <!-- Password -->
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required />
-            </div>
-
-            <!-- login button -->
-            <button type="submit" class="login-submit-btn">Login</button>
-        </form>
-
-        <div class="login-links">
-            <p><a href="/password/forgot">Forgot Password?</a></p>
-            <p>Don't have an account? <a href="/users/register">Register here</a></p>
-            <p><a href="/">Go Back</a></p>
+      <form action="/users/login" method="POST" class="login-form">
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
         </div>
-    </div>
-</body>
 
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <!-- Turnstile widget -->
+        <div
+          class="cf-turnstile"
+          data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"
+        ></div>
+
+        <!-- login button -->
+        <button type="submit" class="login-submit-btn">Login</button>
+      </form>
+
+      <!-- Turnstile script -->
+      <script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+      ></script>
+
+      <div class="login-links">
+        <p><a href="/password/forgot">Forgot Password?</a></p>
+        <p>
+          Don't have an account? <a href="/users/register">Register here</a>
+        </p>
+        <p><a href="/">Go Back</a></p>
+      </div>
+    </div>
+  </body>
 </html>

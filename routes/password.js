@@ -10,6 +10,15 @@ router.get("/forgot", (req, res) => {
 });
 // Handle forgot password form submission
 router.post("/forgot", async (req, res) => {
+  const token = req.body["cf-turnstile-response"];
+  const result = await verifyTurnstile(token, req.ip);
+  if (!result.success) {
+    return res
+      .status(400)
+      .render("reset-password", {
+        error: "Verification failed. Please try again.",
+      });
+  }
   try {
     const db = req.app.locals.client.db(req.app.locals.dbName);
     const usersCollection = db.collection("users");
