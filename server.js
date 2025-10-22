@@ -33,6 +33,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Routes
 const indexRoute = require("./routes/index");
 const usersRoute = require("./routes/users");
