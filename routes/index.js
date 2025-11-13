@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
   });
 });
 
-
 // products
 router.get("/products", (req, res) => {
   res.render("products", { title: "Products" });
@@ -18,7 +17,12 @@ router.get("/products", (req, res) => {
 
 // about
 router.get("/about", (req, res) => {
-  res.render("about", { title: "About Us" });
+  res.render("about", {
+    title: "About Me",
+    name: "Jonah De Guzman",
+    description:
+      "I am a web systems student building projects with Node.js, Express, and EJS.",
+  });
 });
 
 // contact

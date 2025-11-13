@@ -6,14 +6,18 @@ const session = require("express-session"); // Added for user sessions
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
-const verifyTurnstile = require('./utils/turnstileVerify');
+const verifyTurnstile = require("./utils/turnstileVerify");
 
 const path = require("path");
 app.use("/styles", express.static(path.join(__dirname, "styles")));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+// view engine (ensure this exists)
 app.set("view engine", "ejs");
+// serve /public as static
+app.use("/public", express.static("public"));
+
 // Session setup
 app.use(
   session({
@@ -33,7 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 const indexRoute = require("./routes/index");
